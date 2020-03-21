@@ -1,0 +1,24 @@
+%convert USD to Euros using Real Time Data by mikexcohen.com
+%NOTE: using Editor is recommended over Live Editor
+clc;
+close;
+clear;
+
+htmldata= urlread('https://transferwise.com/gb/currency-converter/usd-to-eur-rate?amount=1');
+
+%use 'whos htmldata' in command window to find out more about data
+%then type 'htmldata' to see what's inside (it contains the entire code of that URL)
+%goto find & find for the word 'data-rate-times-amount'
+
+startplace = strfind(htmldata, 'value="1" data-rate-times-amount="EUR"');
+%search through the string 'htmldata' for the string'value="1" data-rate-times-amo..'
+
+%type 'startplace' in Command Window to get the index where the aboube sting is found
+
+%htmldata(startplace) gives in the index. We need data of the conversion amount thus we use htmldata(startplace+40 : startplace+ 46)
+
+USD2Euro= str2double(htmldata(startplace+40 : startplace+ 46));
+
+%Conversion
+USD= 50 ;
+fprintf('%g USD = %g Euros', USD, USD*USD2Euro )
